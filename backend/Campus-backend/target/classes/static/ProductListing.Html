@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusCart</title>
+    <link rel="stylesheet" href="ProductListing.css">
+</head>
+<body>
+
+    <!-- 🟦 HEADER -->
+    <header class="header">
+        <h1>CampusCart</h1>
+
+        <!-- 🔍 Search Bar (Jiji-style) -->
+        <div class="search-bar">
+            <select id="categoryFilter">
+                <option value="all">All Categories</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Books">Books</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Search for products...">
+            <button onclick="searchProducts()">Search</button>
+        </div>
+
+        <!-- 🔗 Login/Register & Add Product -->
+        <div class="auth-links">
+            <a href="#">Login</a>
+            <a href="#">Register</a>
+            <button class="add-product-btn" onclick="toggleProductForm()">+ Add Product</button>
+        </div>
+    </header>
+
+    <!-- 📝 ADD PRODUCT FORM (Hidden by Default) -->
+    <section id="addProductForm" class="product-form">
+        <h2>Add New Product</h2>
+        <input type="text" id="productName" placeholder="Product Name">
+        <input type="text" id="productCategory" placeholder="Category">
+        <input type="text" id="productPrice" placeholder="Price">
+        <input type="file" id="productImage">
+        <button onclick="addProduct()">Add Product</button>
+    </section>
+
+    <!-- 📦 PRODUCT LISTINGS -->
+    <section id="productListing" class="product-listing">
+        <!-- New products will be added dynamically here -->
+    </section>
+
+    <!-- 🦶 FOOTER -->
+    <footer class="footer">
+        <p>© 2025 CampusCart. All Rights Reserved.</p>
+    </footer>
+
+    <script src="ProductListing.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Declares the document type as HTML5 -->
+    <meta charset="UTF-8"> <!-- Sets character encoding to UTF-8 to support special characters -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Makes the layout responsive by setting the width to the device's screen width 
+         and scaling content appropriately -->
+
+    <title>CampusCart</title> <!-- Sets the tab/browser title of the page -->
+
+    <link rel="stylesheet" href="ProductListing.css">
+    <!-- Links the external stylesheet to style this HTML page -->
+</head>
+<body>
+
+    <!-- 🟦 HEADER -->
+    <header class="header"> <!-- Semantic tag that represents the top section of the page -->
+        <h1>CampusCart</h1> <!-- Main heading -->
+
+        <!-- 🔍 Search Bar (Jiji-style) -->
+        <div class="search-bar">
+            <select id="categoryFilter">
+                <!-- A dropdown menu to filter by category -->
+                <!-- The 'id' is used in JavaScript to get its value -->
+                <option value="all">All Categories</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Books">Books</option>
+                <option value="Fashion">Fashion</option>
+            </select>
+
+            <input type="text" id="searchInput" placeholder="Search for products...">
+            <!-- type="text" creates a standard text box -->
+            <!-- placeholder: shows sample text when the input is empty -->
+            <!-- id: allows JS to grab this input’s value -->
+
+            <button onclick="searchProducts()">Search</button>
+            <!-- Calls a JavaScript function named `searchProducts()` when clicked -->
+            <!-- onclick: an event handler attribute used in HTML to bind JS logic to events -->
+        </div>
+
+        <!-- 🔗 Login/Register & Add Product -->
+        <div class="auth-links">
+            <a href="#">Login</a> <!-- Anchor tag with a placeholder link -->
+            <a href="#">Register</a>
+
+            <button class="add-product-btn" onclick="toggleProductForm()">+ Add Product</button>
+            <!-- onclick calls a JavaScript function `toggleProductForm()` that likely shows/hides the form -->
+        </div>
+    </header>
+
+    <!-- 📝 ADD PRODUCT FORM (Hidden by Default) -->
+<section id="addProductForm" class="product-form" style="display: none;">
+    <!-- Initially hidden with inline CSS 'display: none' -->
+    <!-- This section is shown/hidden using JS when "Add Product" is clicked -->
+    
+    <h2>Add New Product</h2>
+
+    <input type="text" id="productName" placeholder="Product Name" required>
+    <!-- type="text": input field for the product name -->
+    <!-- required: HTML5 validation attribute that forces the field to be filled -->
+
+    <textarea id="productDescription" placeholder="Description"></textarea>
+    <!-- Multiline input field for longer product descriptions -->
+
+    <input type="number" id="productPrice" placeholder="Price" step="1" required>
+    <!-- type="number": allows only numeric input -->
+    <!-- step="1": controls number intervals; here it accepts whole numbers only -->
+    <!-- required: makes this field mandatory -->
+
+    <select id="productCategory" required>
+        <option value="">Select Category</option>
+        <!-- Placeholder/default option (empty value means invalid until a real one is picked) -->
+        <!-- More category options will be added dynamically with JavaScript -->
+    </select>
+
+    <select id="productCondition" required>
+        <!-- Dropdown to select if item is new or used -->
+        <option value="New">New</option>
+        <option value="Used">Used</option>
+    </select>
+
+    <input type="file" id="productImage" accept="image/*">
+    <!-- type="file": lets user upload a file -->
+    <!-- accept="image/*": restricts uploads to image file types (e.g., .jpg, .png) -->
+
+    <div class="form-buttons">
+        <button class="cancel-btn" onclick="toggleProductForm()">Cancel</button>
+        <!-- onclick: hides the form again -->
+
+        <button class="submit-btn" onclick="addProduct()">Add Product</button>
+        <!-- onclick: triggers the `addProduct()` function which will collect data and add the product -->
+    </div>
+</section>
+
+    <!-- 📦 PRODUCT LISTINGS -->
+    <section id="productListing" class="product-listing">
+        <!-- Empty by default. Products will be inserted here dynamically using JavaScript -->
+    </section>
+
+    <!-- 🦶 FOOTER -->
+    <footer class="footer">
+        <p>© 2025 CampusCart. All Rights Reserved.</p>
+        <!-- Simple copyright -->
+    </footer>
+
+    <script src="ProductListing.js"></script>
+    <!-- Links an external JavaScript file where all the dynamic functionality lives -->
+</body>
+</html>

@@ -1,0 +1,10 @@
+com\CampusCart\Campus_backend\model\Category.class
+com\CampusCart\Campus_backend\dto\CartItemDTO.class
+com\CampusCart\Campus_backend\config\WebConfig.class
+com\CampusCart\Campus_backend\model\Cart.class
+com\CampusCart\Campus_backend\repository\CartRepository.class
+com\CampusCart\Campus_backend\controller\ProductController.class
+com\CampusCart\Campus_backend\repository\ProductRepository.class
+com\CampusCart\Campus_backend\CampusBackendApplication.class
+com\CampusCart\Campus_backend\model\Product.class
+com\CampusCart\Campus_backend\repository\CategoryRepository.class

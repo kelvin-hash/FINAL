@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="adminPanel.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome Admin</h1>
+    <ul class="actions">
+      <li><a onclick="getAllUsers()">Get All Users</a></li>
+      <li><a onclick="getTotalUsers()">Get Total Users</a></li>
+      <li><a onclick="getReportedUsers()">Get Reported Users</a></li>
+      <li><a onclick="deleteUser()">Delete a User</a></li>
+    </ul>
+
+    <div id="adminOutput"><pre>Output will appear here...</pre></div>
+  </div>
+
+  <script>
+    const BASE_URL = "http://localhost:8080/api/admins";
+
+    async function getAllUsers() {
+      try {
+        const res = await fetch(`${BASE_URL}/users`);
+        const users = await res.json();
+
+        let output = `
+          <h2>All Users</h2>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        users.forEach(user => {
+          output += `
+            <tr>
+              <td>${user.user_id}</td>
+              <td>${user.first_name}</td>
+              <td>${user.last_name}</td>
+              <td>${user.email}</td>
+              <td>${user.phone_number || "N/A"}</td>
+            </tr>
+          `;
+        });
+
+        output += "</tbody></table>";
+        document.getElementById("adminOutput").innerHTML = output;
+      } catch (error) {
+        document.getElementById("adminOutput").innerHTML =
+          "<pre>Error fetching users: " + error.message + "</pre>";
+      }
+    }
+
+    async function getTotalUsers() {
+      try {
+        const res = await fetch(`${BASE_URL}/totalUsers`);
+        const total = await res.text();
+        document.getElementById("adminOutput").innerHTML =
+          `<h2>Total Registered Users</h2><p class="count-display">${total}</p>`;
+      } catch (error) {
+        document.getElementById("adminOutput").innerHTML =
+          "<pre>Error fetching total users: " + error.message + "</pre>";
+      }
+    }
+
+    async function getReportedUsers() {
+      try {
+        const res = await fetch(`${BASE_URL}/reportedUsers`);
+        const reports = await res.json();
+
+        let output = `
+          <h2>Reported Users</h2>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        reports.forEach(user => {
+          output += `
+            <tr>
+              <td>${user.user_id}</td>
+              <td>${user.first_name}</td>
+              <td>${user.last_name}</td>
+              <td>${user.email}</td>
+            </tr>
+          `;
+        });
+
+        output += "</tbody></table>";
+        document.getElementById("adminOutput").innerHTML = output;
+      } catch (error) {
+        document.getElementById("adminOutput").innerHTML =
+          "<pre>Error fetching reports: " + error.message + "</pre>";
+      }
+    }
+
+    async function deleteUser() {
+      const userId = prompt("Enter User ID to delete:");
+      if (userId) {
+        try {
+          const res = await fetch(`${BASE_URL}/users/${userId}`, {
+            method: "DELETE",
+          });
+          const msg = await res.text();
+          alert(msg);
+          getAllUsers(); // Refresh list after deletion
+        } catch (error) {
+          alert("Error deleting user: " + error.message);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
